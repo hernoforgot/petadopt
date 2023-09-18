@@ -1,4 +1,4 @@
-package com.example.petadopt.controller;
+package com.example.petadopt.club.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
