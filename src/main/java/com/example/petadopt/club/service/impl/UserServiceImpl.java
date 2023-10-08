@@ -9,7 +9,9 @@ import com.example.petadopt.club.service.UserService;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -20,11 +22,13 @@ import javax.annotation.Resource;
 import java.util.List;
 
 import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
+
     @Override
     public User findById(Integer id) {
         return userMapper.selectById(id);
@@ -33,10 +37,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findByName(String userName, Integer state) {
         EntityWrapper<User> wrapper = new EntityWrapper<>();
-        if (userName != null && !userName.equals("")){
-            wrapper.like("userName", userName);
+        if (userName != null && !userName.equals("")) {
+            wrapper.like("user_name", userName);
         }
-        if (state != null){
+        if (state != null) {
             wrapper.eq("state", state);
         }
         return userMapper.selectList(wrapper);
@@ -45,8 +49,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> showName(String userName) {
         EntityWrapper wrapper = new EntityWrapper();
-        if(userName != null && !userName.equals("")){
-            wrapper.like("userName",userName);
+        if (userName != null && !userName.equals("")) {
+            wrapper.like("user_name", userName);
         }
         return userMapper.selectList(wrapper);
     }
@@ -68,11 +72,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageInfo<User> allUser(String userName ,Integer pageNum, Integer pageSize) {
+    public PageInfo<User> allUser(String userName, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         EntityWrapper<User> wrapper = new EntityWrapper<>();
-        if(userName != null && !"".equals(userName)){
-            wrapper.like("userName",userName);
+        if (userName != null && !"".equals(userName)) {
+            wrapper.like("user_name", userName);
         }
 
         List<User> list = userMapper.selectList(wrapper);
@@ -82,7 +86,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int add(User user) {
-        return userMapper.insert(user);
+        return userMapper.insert(user).intValue();
     }
 
     @Override

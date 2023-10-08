@@ -1,6 +1,8 @@
 package com.example.petadopt.club.pojo;
 
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
 import lombok.Data;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
  */
 @Data
 public class User {
+    @TableId(value="id",type= IdType.AUTO)
     private Integer id;
     private String userName;
     private String password;

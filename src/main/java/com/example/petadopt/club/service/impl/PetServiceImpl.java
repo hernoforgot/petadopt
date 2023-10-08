@@ -42,7 +42,7 @@ public class PetServiceImpl implements PetService {
         PageHelper.startPage(pageNum,pageSize);
         EntityWrapper<Pet> wrapper = new EntityWrapper<>();
         if(petType != null && !"".equals(petType)){
-            wrapper.like("petType",petType);
+            wrapper.like("pet_type",petType);
         }
         List<Pet> pets = petMapper.selectList(wrapper);
         PageInfo<Pet> pageInfo = new PageInfo<>(pets,3);

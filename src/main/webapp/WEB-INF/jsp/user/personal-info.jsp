@@ -138,7 +138,6 @@
 <script src="${path}/static/bootstrap/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-
     //点击更新按钮弹出模态框。
     $("#user_update_btn").click(function () {
         $.ajax({
@@ -148,6 +147,7 @@
             data: $("#user_edit_form").serialize(),
             success: function (result) {
                 alert("用户信息更新成功！");
+
             },
             error: function (result) {
                 alert("用户信息更新失败！");

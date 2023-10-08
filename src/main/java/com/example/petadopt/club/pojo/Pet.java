@@ -1,6 +1,8 @@
 package com.example.petadopt.club.pojo;
 
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +17,7 @@ import java.util.List;
  */
 @Data
 public class Pet {
+    @TableId(value="id",type= IdType.AUTO)
     private Integer id;
     private String petName;
     private String petType;

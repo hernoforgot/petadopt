@@ -23,7 +23,7 @@ public class BlogServiceImpl implements BlogService {
         PageHelper.startPage(pageNum,pageSize);
         EntityWrapper wrapper = new EntityWrapper();
         if(actionTime != null && !"".equals(actionTime)){
-            wrapper.eq("actionTime",actionTime);
+            wrapper.eq("action_time",actionTime);
         }
         List list = blogMapper.selectList(wrapper);
         PageInfo<Blog> pageInfo = new PageInfo<>(list);

@@ -299,6 +299,11 @@
 
 
     $("#user_login_btn").click(function () {
+        var name = $("#new_loginName").val();
+        var password = $("#new_loginPwd").val();
+        if(name == ""){alert("请输入账号！");return;}
+        if(password == ""){alert("请输入密码！");return;}
+
         $.ajax({
             url: "${path}/user/login",
             type: "POST",
@@ -335,7 +340,7 @@
         // $("#editUser").modal({
         //     backdrop:"static"
         // });
-        window.location.href = "${path}/user/personal-info"
+        window.location.href = "${path}/user/personal-info";
 
     });
 
@@ -375,11 +380,26 @@
     $("#user_register_btn").click(function () {
         var name = $("#new_userName").val();
         var pass = $("#new_password").val();
+        var phone = $("#new_telephone").val();
+        var addr = $("#new_address").val();
+        var age = $("#new_age").val();
+        var email = $("#new_Email").val();
+
         if (name == "" ) {
             alert("请输入用户名")
         } else if (pass == "") {
             alert("请输入密码")
-        } else {
+        } else if (age == "") {
+            alert("请输入年龄")
+        } else if (email == "") {
+            alert("请输入邮箱")
+        } else if (phone == "") {
+            alert("请输入电话")
+        } else if (addr == "") {
+            alert("请输入地址")
+        }
+
+        else {
             $.ajax({
                 url: "${path}/user/create",
                 type: "POST",

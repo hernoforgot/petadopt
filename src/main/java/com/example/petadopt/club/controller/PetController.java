@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,18 +23,18 @@ public class PetController {
 
     @RequestMapping("/pets")
     @ResponseBody
-    public Message pet(@RequestParam(required = false) String petType, @RequestParam("pn")Integer pageNum){
+    public Message pet(@RequestParam(required = false) String petType, @RequestParam("pn") Integer pageNum) {
         Integer pageSize = 3;
-        if(pageNum == null){
+        if (pageNum == null) {
             pageNum = 1;
         }
         PageInfo<Pet> pets = petService.allPet(petType, pageNum, pageSize);
-        return Message.success().add("pageInfo",pets );
+        return Message.success().add("pageInfo", pets);
     }
 
     @RequestMapping("/findById")
     @ResponseBody
-    public Message findPetById(HttpSession session, Integer id){
+    public Message findPetById(HttpSession session, Integer id) {
         Pet pet = petService.findById(id);
         String pics = pet.getPic();
         session.setAttribute("pet", pet);
@@ -43,40 +44,49 @@ public class PetController {
 
     @RequestMapping("/create")
     @ResponseBody
-    public Message add(Pet pet, MultipartFile file){
-        String pic = FileLoad.uploadPetPic(file);
-        pet.setPic(pic);
-        int add = petService.add(pet);
-        if(add>0){
-            return Message.success();
-        }else{
+    public Message add(Pet pet, MultipartFile file) {
+        try {
+            String pic = new FileLoad().uploadPetPic(file);
+            pet.setPic(pic);
+            int add = petService.add(pet);
+            if (add > 0) {
+                return Message.success();
+            } else {
+                return Message.fail();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return Message.fail();
         }
-
     }
 
     @RequestMapping("/update")
     @ResponseBody
-    public Message update(Pet pet, MultipartFile file){
-        if (file != null && file.getSize() > 0){
-            String pic = FileLoad.uploadPetPic(file);
-            pet.setPic(pic);
-        }
-        int update = petService.update(pet);
-        if(update>0){
-           return Message.success();
-        }else{
+    public Message update(Pet pet, MultipartFile file) {
+        try {
+            if (file != null && file.getSize() > 0) {
+                String pic = new FileLoad().uploadPetPic(file);
+                pet.setPic(pic);
+            }
+            int update = petService.update(pet);
+            if (update > 0) {
+                return Message.success();
+            } else {
+                return Message.fail();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return Message.fail();
         }
     }
 
     @RequestMapping("/delete")
     @ResponseBody
-    public Message del(Integer id){
+    public Message del(Integer id) {
         int del = petService.del(id);
-        if(del>0){
+        if (del > 0) {
             return Message.success();
-        }else {
+        } else {
             return Message.fail();
         }
     }

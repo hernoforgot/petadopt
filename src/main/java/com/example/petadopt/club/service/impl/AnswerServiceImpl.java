@@ -33,7 +33,7 @@ public class AnswerServiceImpl implements AnswerService {
     public List<Answer> answersAboutOneComment(Integer commentId) {
         EntityWrapper wrapper = new EntityWrapper();
         if (commentId != null) {
-            wrapper.eq("commentId", commentId);
+            wrapper.eq("comment_id", commentId);
         }
         List<Answer> list = answerMapper.selectList(wrapper);
         if (!list.isEmpty()) {

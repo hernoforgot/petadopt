@@ -55,7 +55,7 @@ public class CommentServiceImpl implements CommentService {
         PageHelper.startPage(pn,pageSize);
         EntityWrapper wrapper = new EntityWrapper();
         if (users != null){
-            wrapper.in("userId", userIds);
+            wrapper.in("user_id", userIds);
         }
         List<Comment> list = commentMapper.selectList(wrapper);
         for (Comment comment: list) {
@@ -72,7 +72,7 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> petComments(Integer petId) {
         EntityWrapper wrapper = new EntityWrapper();
         if (petId != null) {
-            wrapper.eq("petId", petId);
+            wrapper.eq("pet_id", petId);
         }
         List<Comment> comments = commentMapper.selectList(wrapper);
         for (Comment comment : comments){
@@ -106,7 +106,7 @@ public class CommentServiceImpl implements CommentService {
         PageHelper.startPage(pageNum,pageSize);
         EntityWrapper<Comment> wrapper = new EntityWrapper<>();
         if(userName!=null&&!"".equals(userName)){
-            wrapper.like("userName",userName);
+            wrapper.like("user_name",userName);
 
         }
         List<Comment> list = commentMapper.selectList(wrapper);

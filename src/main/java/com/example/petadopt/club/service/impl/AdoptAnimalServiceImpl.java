@@ -49,7 +49,7 @@ public class AdoptAnimalServiceImpl implements AdoptAnimalService {
             wrapper.eq("state", state);
         }
         if (users != null){
-            wrapper.in("userId", userIds);
+            wrapper.in("user_id", userIds);
         }
         List<AdoptAnimal> list = adoptAnimalMapper.selectList(wrapper);
         for(AdoptAnimal a : list){
@@ -71,7 +71,7 @@ public class AdoptAnimalServiceImpl implements AdoptAnimalService {
         PageHelper.startPage(pageNum,pageSize);
         EntityWrapper<AdoptAnimal> wrapper = new EntityWrapper<>();
         if(adoptTime!=null && !"".equals(adoptTime)){
-            wrapper.like("adoptTime",adoptTime);
+            wrapper.like("adopt_time",adoptTime);
         }
         List<AdoptAnimal> list = adoptAnimalMapper.selectList(wrapper.eq("state",1));
         for(AdoptAnimal a : list){

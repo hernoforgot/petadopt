@@ -21,7 +21,7 @@ public class AdminServiceImpl implements AdminService {
         PageHelper.startPage(pageNum,pageSize);
         EntityWrapper wrapper = new EntityWrapper();
         if(adminName != null && !"".equals(adminName)){
-            wrapper.like("adminName",adminName);
+            wrapper.like("admin_name",adminName);
         }
         List list = adminMapper.selectList(wrapper);
         PageInfo<Admins> pageInfo = new PageInfo<>(list);
